@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from "react";
 import ProductDetail from "./ProductDetail";
 import ConfirmDelete from "./ConfirmDelete";
-import {fetchLastProductId, fetchProduct, fetchProducts} from "../../services/Product/Product";
+import {DeleteProduct, fetchLastProductId, fetchProduct, fetchProducts} from "../../services/Product/Product";
 
 export default function Products() {
     const [products, setProducts] = useState([]); // List of products
@@ -150,12 +150,6 @@ export default function Products() {
 
         // Set visible to ProductDetail
         setVisibleProductDetail(true);
-    };
-
-    const DeleteProduct = (e) => {
-        setVisibleDelete(true);
-        const product = products.find((product) => product.id === parseInt(e.target.value));
-        setProduct(product);
     };
 
     const handleOnDelete = async () => {
