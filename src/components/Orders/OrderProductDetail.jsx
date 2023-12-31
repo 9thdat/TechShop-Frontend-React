@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useMemo, useRef, useCallback} from "react";
 import {fetchProductQuantity, fetchTotalProductQuantity} from "../../services/Product/ProductQuantity";
 import {fetchProduct} from "../../services/Product/Product";
-import {getLastId} from "../../services/Order/OrderDetail";
+import {getLastId} from "../../services/Order/Order";
 
 export default function OrderProductDetail({visible, onClose, order, action, onSave, orderDetail}) {
     const [orderProducts, setOrderProducts] = useState([]);
@@ -74,33 +74,6 @@ export default function OrderProductDetail({visible, onClose, order, action, onS
                 ...prevOrderProduct,
                 productId: value,
             }));
-
-            const fetchData = async () => {
-                try {
-                    const productData = await fetchProductQuantity(value);
-                    if (Array.isArray(productData)) {
-                        setProductQuantity(productData);
-                    } else {
-                        setProductQuantity([]);
-                    }
-
-                    if (productData.length === 0) {
-                        setIsValid((prevState) => ({
-                            ...prevState,
-                            productId: false,
-                        }));
-                    } else {
-                        setIsValid((prevState) => ({
-                            ...prevState,
-                            productId: true,
-                        }));
-                    }
-                } catch (err) {
-                    console.error(err);
-                }
-            };
-
-            await fetchData();
         } else if (id === "color") {
             const fetchData = async () => {
                 try {
@@ -108,13 +81,11 @@ export default function OrderProductDetail({visible, onClose, order, action, onS
                     setTotalProductQuantity(totalProductQuantity);
 
                     const productData = await fetchProduct(orderProduct.productId);
-                    price = Number(productData.price);
-                    totalPrice = price * Number(orderProduct.quantity);
+                    const price = Number(productData.price);
                     setOrderProduct((prevOrderProduct) => ({
                         ...prevOrderProduct,
                         color: value,
                         price: price,
-                        totalPrice: totalPrice,
                     }));
 
                     if (value === "") {
@@ -136,26 +107,11 @@ export default function OrderProductDetail({visible, onClose, order, action, onS
             await fetchData();
         } else if (id === "quantity") {
             const quantityValue = Number(value);
-            const productData = await fetchProduct(orderProduct.productId);
-            totalPrice = Number(productData.price) * quantityValue;
 
             setOrderProduct((prevOrderProduct) => ({
                 ...prevOrderProduct,
                 quantity: quantityValue,
-                totalPrice: totalPrice,
             }));
-
-            if (typeof (quantityValue) !== "number" || quantityValue > totalProductQuantity) {
-                setIsValid((prevState) => ({
-                    ...prevState,
-                    quantity: false,
-                }));
-            } else {
-                setIsValid((prevState) => ({
-                    ...prevState,
-                    quantity: true,
-                }));
-            }
         } else {
             setOrderProduct((prevOrderProduct) => ({
                 ...prevOrderProduct,
@@ -175,6 +131,18 @@ export default function OrderProductDetail({visible, onClose, order, action, onS
 
         try {
             const productsQuantityData = await fetchProductQuantity(orderProduct.productId);
+
+            if (productsQuantityData.length === 0) {
+                setIsValid((prevState) => ({
+                    ...prevState,
+                    productId: false,
+                }));
+            } else {
+                setIsValid((prevState) => ({
+                    ...prevState,
+                    productId: true,
+                }));
+            }
             setProductQuantity(productsQuantityData);
         } catch (err) {
             console.error(err);
@@ -275,6 +243,28 @@ export default function OrderProductDetail({visible, onClose, order, action, onS
         }
     };
 
+    const handleValidateQuantity = (e) => {
+        const {value} = e.target;
+        const totalPrice = Number(orderProduct.price) * Number(value);
+
+        setOrderProduct((prevOrderProduct) => ({
+            ...prevOrderProduct,
+            totalPrice: totalPrice,
+        }));
+
+        if (isNaN(value) || Number(value) > totalProductQuantity) {
+            setIsValid((prevState) => ({
+                ...prevState,
+                quantity: false,
+            }));
+        } else {
+            setIsValid((prevState) => ({
+                ...prevState,
+                quantity: true,
+            }));
+        }
+    }
+
 
     if (!visible) {
         return null;
@@ -374,6 +364,7 @@ export default function OrderProductDetail({visible, onClose, order, action, onS
                             className={`border border-black rounded-md text-center block disabled:bg-gray-300`}
                             id="quantity"
                             onChange={(e) => handleOnChange(e)}
+                            onBlur={(e) => handleValidateQuantity(e)}
                             value={orderProduct.quantity || ""}
                             disabled={currentOrderProduct === "" || action === "edit"}
                         />

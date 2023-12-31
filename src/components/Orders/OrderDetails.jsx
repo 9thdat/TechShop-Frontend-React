@@ -3,7 +3,8 @@ import tinh_tp from "../../Models/Address/tinh-tp.json";
 import quan_huyen from "../../Models/Address/quan-huyen.json";
 import xa_phuong from "../../Models/Address/xa-phuong.json";
 import OrderProductDetail from "./OrderProductDetail";
-import {fetchOrderDetail, getLastId} from "../../services/Order/OrderDetail";
+import {fetchOrderDetail} from "../../services/Order/OrderDetail";
+import {getLastId} from "../../services/Order/Order";
 import {fetchCustomer} from "../../services/Customer/Customer";
 import {fetchDiscountByCode, fetchDiscountCodeById} from "../../services/Discount/Discount";
 
@@ -54,17 +55,12 @@ export default function OrderDetails({visible, orderData, handleAddOrder, handle
 
     useEffect(() => {
         if (action === "add") {
-            const getLastOrderId = async () => {
-                await getLastId().then((res) => {
-                        setOrder((prevOrder) => ({
-                            ...prevOrder,
-                            id: res + 1,
-                        }));
-                    }
-                );
-            }
-
-            getLastOrderId();
+            getLastId().then((res) => {
+                setOrder((prevOrder) => ({
+                    ...prevOrder,
+                    id: res + 1,
+                }));
+            });
 
             setIsValid({
                 email: false,
