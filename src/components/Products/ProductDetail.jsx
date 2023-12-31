@@ -94,11 +94,11 @@ export default function ProductDetail({action, visible, onClose, product, onRelo
 
                 setIsValid({
                     ...isValid,
-                    name: false,
-                    price: false,
-                    preDiscount: false,
-                    discountPercent: false,
-                    brand: false,
+                    name: true,
+                    price: true,
+                    preDiscount: true,
+                    discountPercent: true,
+                    brand: true,
                     newName: true,
                     newPrice: true,
                     newPreDiscount: true,
@@ -117,11 +117,11 @@ export default function ProductDetail({action, visible, onClose, product, onRelo
 
             setIsValid({
                 ...isValid,
-                name: true,
-                price: true,
-                preDiscount: true,
-                discountPercent: true,
-                brand: true,
+                name: false,
+                price: false,
+                preDiscount: false,
+                discountPercent: false,
+                brand: false,
                 newName: true,
                 newPrice: true,
                 newPreDiscount: true,

@@ -3,7 +3,21 @@ import ConfirmDeleteProductParameter from "./ConfirmDeleteProductParameter";
 import {DeleteProductBackupCharger} from "../../services/Product/ProductBackupCharger";
 
 export default function ProductBackupCharger({visible, onClose, data, action, onSave, onReload}) {
-    const [productBackupCharger, setProductBackupCharger] = useState({});
+    const [productBackupCharger, setProductBackupCharger] = useState({
+        id: "",
+        efficiency: "",
+        capacity: "",
+        timefullcharge: "",
+        input: "",
+        output: "",
+        core: "",
+        tech: "",
+        size: "",
+        weight: "",
+        madein: "",
+        brandof: "",
+        brand: "",
+    });
     const [visibleConfirmDelete, setVisibleConfirmDelete] = useState(false);
 
     useEffect(() => {

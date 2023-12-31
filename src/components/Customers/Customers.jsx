@@ -99,23 +99,18 @@ export default function Customers() {
         };
     }
 
+
     const handleOnChangeStatus = async () => {
-        const customerData = {
-            ...customer,
-            status: customer.status === "active" ? "inactive" : "active"
-        };
-
-        setCustomer(customerData);
-
-        const response = changeCustomerStatus(customer.email);
+        const response = await changeCustomerStatus(customer.email);
         if (response.status === 204) {
             alert("Đổi tình trạng thành công!");
             const data = await fetchCustomers();
             setCustomers(data);
+        } else {
+            alert("Đổi tình trạng thất bại!");
         }
         setVisibleCustomerStatus(false);
 
-        setVisibleCustomerStatus(false);
     }
 
     const handleAddCustomer = async (customerData) => {

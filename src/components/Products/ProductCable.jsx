@@ -3,7 +3,18 @@ import ConfirmDeleteProductParameter from "./ConfirmDeleteProductParameter";
 import {DeleteProductCable} from "../../services/Product/ProductCable";
 
 export default function ProductCable({visible, onClose, data, action, onSave, onReload}) {
-    const [productCable, setProductCable] = useState({});
+    const [productCable, setProductCable] = useState({
+        id: "",
+        tech: "",
+        function: "",
+        input: "",
+        output: "",
+        length: "",
+        maximum: "",
+        madein: "",
+        brandof: "",
+        brand: "",
+    });
     const [visibleConfirmDelete, setVisibleConfirmDelete] = useState(false);
 
     useEffect(() => {

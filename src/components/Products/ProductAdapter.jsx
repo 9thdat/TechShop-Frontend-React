@@ -3,7 +3,19 @@ import ConfirmDeleteProductParameter from "./ConfirmDeleteProductParameter";
 import {DeleteProductAdapter} from "../../services/Product/ProductAdapter";
 
 export default function ProductAdapter({visible, onClose, onSave, data, action, onReload}) {
-    const [productAdapter, setProductAdapter] = useState({});
+    const [productAdapter, setProductAdapter] = useState({
+        id: "",
+        model: "",
+        function: "",
+        input: "",
+        output: "",
+        maximum: "",
+        size: "",
+        tech: "",
+        madein: "",
+        brandof: "",
+        brand: "",
+    });
     const [visibleConfirmDelete, setVisibleConfirmDelete] = useState(false);
 
     useEffect(() => {

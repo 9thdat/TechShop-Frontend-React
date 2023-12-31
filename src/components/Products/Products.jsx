@@ -191,6 +191,12 @@ export default function Products() {
         }
     }
 
+    const handleOpenDeleteProduct = (e) => {
+        const product = products.find((product) => product.id === parseInt(e.target.value));
+        setProduct(product);
+        setVisibleDelete(true);
+    }
+
     const handleOnAbortDelete = () => {
         setVisibleDelete(false);
     }
@@ -337,7 +343,7 @@ export default function Products() {
                                     <button
                                         className="px-2 py-1 text-white bg-red-500 rounded-md"
                                         value={product.id}
-                                        onClick={(e) => DeleteProduct(e)}>Xóa
+                                        onClick={(e) => handleOpenDeleteProduct(e)}>Xóa
                                     </button>
                                 </td>
                             </tr>

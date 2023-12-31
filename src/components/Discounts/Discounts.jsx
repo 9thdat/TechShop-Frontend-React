@@ -5,8 +5,19 @@ import {AddDiscount, fetchDiscounts, fetchLastDiscountId, UpdateDiscount} from "
 
 export default function Discounts() {
     const [discounts, setDiscounts] = useState([]);
-    const [discount, setDiscount] = useState({});
-
+    const [discount, setDiscount] = useState({
+        id: "",
+        code: "",
+        type: "",
+        value: "",
+        quantity: "",
+        startDate: "",
+        endDate: "",
+        status: "",
+        minApply: "0",
+        maxSpeed: "-1",
+        description: "",
+    });
     const [action, setAction] = useState("");
     const [visibleDiscountDetail, setVisibleDiscountDetail] = useState(false);
 
