@@ -131,3 +131,13 @@ export const fetchProductSold = async (startMonth, startYear, endMonth, endYear,
         return [];
     }
 }
+
+
+export const getLastId = async () => {
+    try {
+        const response = await axios.get("/Order/GetLastId");
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
+}

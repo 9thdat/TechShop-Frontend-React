@@ -29,12 +29,3 @@ export const CancelOrderDetail = async (orderData) => {
         return (e.res);
     }
 }
-
-export const getLastId = async () => {
-    try {
-        const response = await axios.get("/Order/GetLastId");
-        return response.data;
-    } catch (e) {
-        console.log(e);
-    }
-}
