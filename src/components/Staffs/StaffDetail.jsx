@@ -8,7 +8,23 @@ const quan_huyen = require("../../Models/Address/quan-huyen.json");
 const xa_phuong = require("../../Models/Address/xa-phuong.json");
 
 export default function StaffDetail({visible, onClose, staffData, action, handleAddStaff, handleEditStaff}) {
-    const [staff, setStaff] = useState(staffData);
+    const [staff, setStaff] = useState({
+        email: "",
+        name: "",
+        password: "",
+        phone: "",
+        image: "",
+        birthday: new Date().toISOString().split('T')[0],
+        gender: "Nam",
+        status: "active",
+        ward: "Phường Tân Định",
+        district: "Quận 1",
+        city: "Thành phố Hồ Chí Minh",
+        address: "",
+        role: "staff",
+        cityCode: 79,
+        districtCode: 760,
+    });
 
     const [cities, setCities] = useState(tinh_tp);
     const [districts, setDistricts] = useState(quan_huyen);

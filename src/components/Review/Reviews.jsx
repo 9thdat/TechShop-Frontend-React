@@ -6,7 +6,14 @@ import {fetchReviews, UpdateReview} from "../../services/Review/Review";
 
 export default function Reviews() {
     const [reviews, setReviews] = useState([]);
-    const [review, setReview] = useState({});
+    const [review, setReview] = useState({
+        id: "",
+        productId: "",
+        customerEmail: "",
+        rating: "",
+        content: "",
+        adminReply: "",
+    });
     const [visibleReviewDetail, setVisibleReviewDetail] = useState(false);
     const [originalReviews, setOriginalReviews] = useState({});
 
