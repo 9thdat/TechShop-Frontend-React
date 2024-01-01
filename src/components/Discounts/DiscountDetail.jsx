@@ -9,7 +9,21 @@ export default function DiscountDetail({
                                            handleEditDiscount,
                                            action
                                        }) {
-    const [discount, setDiscount] = useState(discountData);
+    const [discount, setDiscount] = useState(
+        {
+            id: "",
+            code: "",
+            type: "",
+            value: "",
+            startDate: "",
+            endDate: "",
+            status: "",
+            minApply: "",
+            maxSpeed: "",
+            quantity: "",
+            description: "",
+        }
+    );
     const [codeExist, setCodeExist] = useState(false);
 
     const [isValid, setIsValid] = useState({
@@ -269,8 +283,8 @@ export default function DiscountDetail({
                             value={discount.status}
                         >
                             <option value={"active"}>Hoạt động</option>
-                            <option value={"disable"}>Không hoạt động</option>
-                            <option value={"expired"}>Hết hạn</option>
+                            <option value={"disabled"}>Không hoạt động</option>
+                            <option disabled={true} hidden={true} value={"expired"}>Hết hạn</option>
                         </select>
                     </div>
                     <div className="">

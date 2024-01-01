@@ -481,21 +481,21 @@ export default function OrderDetails({visible, orderData, handleAddOrder, handle
     const handleValidField = (e) => {
         const {id, value} = e.target;
 
-        setIsValid({
-            ...isValid,
+        setIsValid((prev) => ({
+            ...prev,
             [id]: value !== "",
-        })
+        }));
 
         const fields = ["customerEmail", "name", "address", "phone"];
-        fields.forEach(field => {
+        fields.forEach((field) => {
             if (id === field && isValid[`new${field.charAt(0).toUpperCase() + field.slice(1)}`]) {
-                setIsValid({
-                    ...isValid,
+                setIsValid((prev) => ({
+                    ...prev,
                     [`new${field.charAt(0).toUpperCase() + field.slice(1)}`]: false,
-                })
+                }));
             }
         });
-    }
+    };
 
     if (!visible) return null;
     return (
