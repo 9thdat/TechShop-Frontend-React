@@ -3,7 +3,7 @@ import axios from '../../api/axios'
 export const fetchDiscounts = async () => {
     try {
         const response = await axios.get("/Discount");
-        return response;
+        return response.data;
     } catch (e) {
         console.error(e.message);
         return {

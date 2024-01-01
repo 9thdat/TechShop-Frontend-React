@@ -9,7 +9,7 @@ export default function Navbar() {
     const [showNotifications, setShowNotifications] = useState(false);
 
     useEffect(() => {
-        const email = localStorage.getItem("userEmail");
+        const email = sessionStorage.getItem("userEmail");
         fetchUser(email).then((res) => {
             setUser(res);
         });

@@ -647,21 +647,21 @@ export default function ProductDetail({action, visible, onClose, product, onRelo
     const handleValidField = (e) => {
         const {id, value} = e.target;
 
-        setIsValid({
-            ...isValid,
+        setIsValid((prev) => ({
+            ...prev,
             [id]: value !== "",
-        })
+        }));
 
         const fields = ["name", "price", "preDiscount", "discountPercent", "brand"];
-        fields.forEach(field => {
+        fields.forEach((field) => {
             if (id === field && isValid[`new${field.charAt(0).toUpperCase() + field.slice(1)}`]) {
-                setIsValid({
-                    ...isValid,
+                setIsValid((prev) => ({
+                    ...prev,
                     [`new${field.charAt(0).toUpperCase() + field.slice(1)}`]: false,
-                })
+                }));
             }
         });
-    }
+    };
 
     if (!visible) {
         return null;

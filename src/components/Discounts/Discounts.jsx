@@ -31,7 +31,7 @@ export default function Discounts() {
     });
 
     useEffect(() => {
-        localStorage.setItem("menu", "discounts");
+        sessionStorage.setItem("menu", "discounts");
     }, []);
 
     useEffect(() => {
