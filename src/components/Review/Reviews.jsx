@@ -96,7 +96,7 @@ export default function Reviews() {
                 <input
                     type="text"
                     id="searchValue"
-                    className="col-start-3 lg:col-start-1 col-end-7 lg:col-end-4 row-start-1 row-end-2 border border-blue-300 rounded-md"
+                    className="col-start-1 col-end-7 lg:col-end-4 row-start-1 row-end-2 border border-blue-300 rounded-md"
                     placeholder="Tìm kiếm đánh giá"
                     value={search.searchValue}
                     onChange={(e) => handleOnChangeSearchType(e)}
