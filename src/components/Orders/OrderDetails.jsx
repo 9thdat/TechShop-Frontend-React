@@ -773,7 +773,7 @@ export default function OrderDetails({visible, orderData, handleAddOrder, handle
                             className={`border border-black rounded-md text-center block w-full disabled:bg-gray-300`}
                             onChange={(e) => handleOnChange(e)}
                             value={order.status}
-                            disabled={(orderData.status === "Done") || (orderData.status === "Cancelled")}
+                            disabled={(orderData.status === "Done") || (orderData.status === "Cancelled") || action === "add"}
                         >
                             <option value={"Processing"}>Đang xử lý</option>
                             <option value={"Delivering"}>Đang giao</option>
