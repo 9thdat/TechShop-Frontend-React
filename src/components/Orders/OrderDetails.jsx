@@ -455,6 +455,13 @@ export default function OrderDetails({visible, orderData, handleAddOrder, handle
                     discountCode: "",
                 }));
                 return;
+            } else if (discount.data.status === "disabled") {
+                alert("Mã giảm giá đã bị vô hiệu");
+                setOrder((prevOrder) => ({
+                    ...prevOrder,
+                    discountCode: "",
+                }));
+                return;
             }
         }
 
