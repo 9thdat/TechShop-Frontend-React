@@ -11,12 +11,15 @@ import {FaUsers} from "react-icons/fa";
 import {SiGoogleanalytics} from "react-icons/si";
 import techShopLogo from "../../assets/images/logo/techShopLogo.svg";
 import {useNavigate} from "react-router-dom";
+import {getLastId} from "../../services/Order/Order";
+import {toast} from "react-toastify";
 
 function Sidebar() {
     const [dateTime, setDateTime] = useState("");
     const [menu, setMenu] = useState(
         sessionStorage.getItem("menu") ? sessionStorage.getItem("menu") : "home"
     );
+    const currentLastOrderId = useRef(0);
     const [role, setRole] = useState(sessionStorage.getItem("role"));
     const navigate = useNavigate();
 
@@ -50,6 +53,48 @@ function Sidebar() {
             clearInterval(interval);
         };
     }, []);
+
+    useEffect(() => {
+        const setLastOrderId = async () => {
+            try {
+                const lastOrderId = await getLastId();
+                currentLastOrderId.current = lastOrderId;
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        setLastOrderId();
+    }, []);
+
+    useEffect(() => {
+        const interval = setInterval(checkNewOrder, 5000);
+        return () => {
+            clearInterval(interval);
+        }
+    }, []);
+
+    const checkNewOrder = async () => {
+        try {
+            const lastOrderId = await getLastId();
+            if (lastOrderId !== currentLastOrderId.current) {
+                currentLastOrderId.current = lastOrderId;
+                toast('Có đơn hàng mới!', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
 
     const handleMenuClick = (e) => {
         const value = e.currentTarget.value;
