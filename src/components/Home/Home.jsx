@@ -48,13 +48,17 @@ export default function Home() {
 
     useEffect(() => {
         fetchRevenueToday().then((res) => {
-            setRevenueToday(res);
+            let number = res;
+            let formattedNumber = number.toLocaleString('vi-VI');
+            setRevenueToday(formattedNumber);
         });
     }, []);
 
     useEffect(() => {
         fetchRevenueMonth().then((res) => {
-            setRevenueMonth(res);
+            let number = res;
+            let formattedNumber = number.toLocaleString('vi-VI');
+            setRevenueMonth(formattedNumber);
         });
     }, []);
 
@@ -182,7 +186,7 @@ export default function Home() {
                                 </td>
                                 <td className="text-center">{item.name}</td>
                                 <td className="text-center">{item.phone}</td>
-                                <td className="hidden xl:block text-center">{item.revenue}</td>
+                                <td className="hidden xl:block text-center">{item.revenue.toLocaleString('vi-VI')}</td>
                             </tr>
                         ))}
                         </tbody>

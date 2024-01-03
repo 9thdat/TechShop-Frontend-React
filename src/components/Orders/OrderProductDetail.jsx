@@ -240,7 +240,6 @@ export default function OrderProductDetail({visible, onClose, order, action, onS
         }
     }
 
-
     if (!visible) {
         return null;
     }
@@ -315,7 +314,12 @@ export default function OrderProductDetail({visible, onClose, order, action, onS
                             value={orderProduct.color}
                             disabled={currentOrderProduct === 0 || action === "edit"}
                         >
-                            <option value={""}></option>
+                            {
+                                (action === "add" && currentOrderProduct !== 0) ?
+                                <option value={""}></option>
+                                :
+                                    <option value={orderProduct.color}>{orderProduct.color}</option>
+                            }
                             {
                                 productQuantity &&
                                 productQuantity.map((product, index) => (
@@ -360,7 +364,7 @@ export default function OrderProductDetail({visible, onClose, order, action, onS
                             type="text"
                             className={`border border-black rounded-md text-center block disabled:bg-gray-300`}
                             id="price"
-                            value={orderProduct.price || ""}
+                            value={orderProduct.price ? Number(orderProduct.price).toLocaleString('vi-VI') : ""}
                             disabled={true}
                         />
                     </div>
@@ -370,7 +374,7 @@ export default function OrderProductDetail({visible, onClose, order, action, onS
                             type="text"
                             className={`border border-black rounded-md text-center block disabled:bg-gray-300`}
                             id="totalPrice"
-                            value={orderProduct.totalPrice || ""}
+                            value={orderProduct.totalPrice ? Number(orderProduct.totalPrice).toLocaleString('vi-VI') : ""}
                             disabled={true}
                         />
                     </div>

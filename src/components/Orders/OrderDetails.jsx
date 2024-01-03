@@ -622,7 +622,7 @@ export default function OrderDetails({visible, orderData, handleAddOrder, handle
                             className={`border border-black rounded-md text-center block w-full disabled:bg-gray-300`}
                             id="totalPrice"
                             onChange={(e) => handleOnChange(e)}
-                            value={order.totalPrice}
+                            value={order.totalPrice.toLocaleString('vi-VI')}
                             disabled={true}
                         />
                     </div>
@@ -719,7 +719,7 @@ export default function OrderDetails({visible, orderData, handleAddOrder, handle
                             className={`border border-black rounded-md text-center block w-full disabled:bg-gray-300`}
                             id="shippingFee"
                             onChange={(e) => handleOnChange(e)}
-                            value={order.shippingFee}
+                            value={order.shippingFee.toLocaleString('vi-VI')}
                             disabled={true}
                         />
                     </div>

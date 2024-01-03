@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 
-
 export default function ProductImage({visible, onClose, data, action, onSave}) {
     const [productImage, setProductImage] = useState({});
     const [productImages, setProductImages] = useState([]);

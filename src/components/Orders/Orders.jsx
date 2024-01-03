@@ -286,7 +286,7 @@ export default function Orders() {
                                         scope="row"
                                         className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap"
                                     >
-                                        {order.totalPrice}
+                                        {order.totalPrice.toLocaleString('vi-VI')}
                                     </td>
                                     <td
                                         scope="row"
