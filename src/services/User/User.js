@@ -57,7 +57,13 @@ export const Login = async (email, password) => {
         return res;
     } catch (e) {
         console.log(e);
-        return (e.res);
+        if (e.response.status === 404) {
+            alert("Người dùng không tồn tại");
+        } else if (e.response.status === 401) {
+            alert("Sai mật khẩu");
+        } else {
+            alert("Lỗi không xác định");
+        }
     }
 }
 
@@ -73,12 +79,16 @@ export const ValidateToken = async (token) => {
     }
 }
 
-export const ChangePassword = async (email, password) => {
+export const ChangePassword = async (email, newPassword) => {
     try {
-        const res = await axios.put(`/User/ChangePassword/${email}`, password);
+        const res = await axios.put(`/User/ChangePassword/email=${email}&newPassword=${newPassword}`);
         return res;
     } catch (e) {
         console.log(e);
-        return (e.res);
+        return e.response;
     }
 }
+
+
+
+

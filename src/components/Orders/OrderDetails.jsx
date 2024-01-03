@@ -125,7 +125,9 @@ export default function OrderDetails({visible, orderData, handleAddOrder, handle
     }, [orderData, action]);
 
     useEffect(() => {
-        fetchShippingFee();
+        if (action === "add") {
+            fetchShippingFee();
+        }
 
         return () => {
             console.log("fetchShippingFee");
