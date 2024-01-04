@@ -145,7 +145,19 @@ export default function StaffDetail({visible, onClose, staffData, action, handle
                 districtCode: newDistrict?.code,
                 ward: newWard?.name,
             }));
-        } else {
+        }
+        else if (id === "image") {
+        const reader = new FileReader();
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setStaff({
+                    ...staff,
+                    image: reader.result,
+                });
+            }
+        }
+        reader.readAsDataURL(e.target.files[0]);
+        }else {
             setStaff((prevStaff) => ({
                 ...prevStaff,
                 [id]: value,
@@ -184,6 +196,11 @@ export default function StaffDetail({visible, onClose, staffData, action, handle
         if (!isValid.email || !isValid.password || !isValid.name || !isValid.phone || !isValid.address || !isNewEmail) {
             alert("Vui lòng nhập đúng thông tin!");
             return;
+        }
+        if (staff.image !== "") {
+            staff.image = staff.image.split(',')[1];
+        } else {
+            staff.image = "";
         }
 
         if (action === "add") {
@@ -484,7 +501,12 @@ export default function StaffDetail({visible, onClose, staffData, action, handle
                             Ảnh đại diện
                         </label>
                         <img
-                            src={staff.image ? `data:image/jpeg;base64, ${staff.image}` : defaultAvatar}
+                            src={
+                                action === "detail" ?
+                                    staff.image ? `data:image/jpeg;base64, ${staff.image}` : defaultAvatar
+                                    :
+                                    staff.image ? staff.image : defaultAvatar
+                            }
                             alt="avatar"
                             className="w-24 h-24 rounded-full mx-auto"
                         />
