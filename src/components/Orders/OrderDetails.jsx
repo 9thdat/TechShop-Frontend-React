@@ -473,6 +473,14 @@ export default function OrderDetails({visible, orderData, handleAddOrder, handle
                 }));
                 return;
             }
+            else if (discount.data.quantity === 0) {
+                alert("Mã giảm giá đã hết lượt sử dụng");
+                setOrder((prevOrder) => ({
+                    ...prevOrder,
+                    discountCode: "",
+                }));
+                return;
+            }
         }
 
         if (order.totalPrice >= discount.minApply) {
