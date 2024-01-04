@@ -43,7 +43,7 @@ export default function OrderDetails({visible, orderData, handleAddOrder, handle
     const [wards, setWards] = useState(xa_phuong);
     const [isNewCustomer, setIsNewCustomer] = useState(false);
     const [isValid, setIsValid] = useState({
-        email: false,
+        email: true,
         name: false,
         address: false,
         phone: false,
@@ -63,7 +63,7 @@ export default function OrderDetails({visible, orderData, handleAddOrder, handle
             });
 
             setIsValid({
-                email: false,
+                email: true,
                 name: false,
                 address: false,
                 phone: false,
@@ -366,6 +366,14 @@ export default function OrderDetails({visible, orderData, handleAddOrder, handle
 
     const handleSearchCustomer = useCallback(async (e) => {
             const {value} = e.target;
+            if (value === "") {
+                setIsValid((prevIsValid) => ({
+                    ...prevIsValid,
+                    newEmail: false,
+                    email: true,
+                }));
+                return;
+            }
             const isValid = isValidEmail(value);
             setIsValid((prevIsValid) => ({
                 ...prevIsValid,
@@ -536,7 +544,7 @@ export default function OrderDetails({visible, orderData, handleAddOrder, handle
                     </div>
                     <div className="">
                         <label className="" htmlFor="customerEmail">
-                            Email khách hàng(*)
+                            Email khách hàng
                         </label>
                         <input
                             type="email"
