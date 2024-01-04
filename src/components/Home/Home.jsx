@@ -180,7 +180,7 @@ export default function Home() {
                                 <td className="text-center">
                                     <img
                                         className="w-10"
-                                        src={item.avatar ? `data:image/jpeg;base64, ${item.image}` : defaultAvatar}
+                                        src={item.image ? `data:image/jpeg;base64, ${item.image}` : defaultAvatar}
                                         alt=""
                                     />
                                 </td>
