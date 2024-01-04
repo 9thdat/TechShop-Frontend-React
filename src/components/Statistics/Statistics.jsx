@@ -121,7 +121,7 @@ export default function Statistics() {
                         value={chartType}
                         onChange={(e) => setChartType(e.target.value)}
                     >
-                        <option value="MonthRevenue">Doanh thu theo tháng</option>
+                        <option value="MonthRevenue">Doanh thu</option>
                         <option value="ProductSold">Số lượng sản phẩm bán ra</option>
                     </select>
                 </div>
