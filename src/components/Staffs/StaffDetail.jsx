@@ -119,7 +119,6 @@ export default function StaffDetail({visible, onClose, staffData, action, handle
         setIsNewEmail(true);
     }, [staffData, action]);
 
-
     const handleOnChange = (e) => {
         const {id, value} = e.target;
 
@@ -243,7 +242,6 @@ export default function StaffDetail({visible, onClose, staffData, action, handle
 
 
     if (!visible) return null;
-
 
     return (
         <div

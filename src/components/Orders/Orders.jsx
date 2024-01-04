@@ -32,12 +32,20 @@ export default function Orders() {
 
 
     const handleOnSearch = () => {
+        if (search.current.searchValue === "" && search.current.statusValue === "all") {
+            setOrders(originalOrders);
+            return;
+        }
+
         const searchValue = search.current.searchValue;
         const sortValue = search.current.sortValue;
         const statusValue = search.current.statusValue;
 
         const searchResult = originalOrders.filter((order) => {
                 if (statusValue === "all") {
+                    if (order[sortValue] === null){ // Nếu không có dữ liệu thì không thể tìm kiếm
+                        return false;
+                    }
                     return order[sortValue].toLowerCase().includes(searchValue.toLowerCase());
                 } else {
                     return order[sortValue].toLowerCase().includes(searchValue.toLowerCase()) && order.status === statusValue;
@@ -88,7 +96,22 @@ export default function Orders() {
         }
 
         try {
-            const orderResponse = await AddOrder(orderData);
+            const orderResponse = await AddOrder({
+                customerEmail: orderData.customerEmail,
+                name: orderData.name,
+                address: orderData.address,
+                ward: orderData.ward,
+                district: orderData.district,
+                city: orderData.city,
+                phone: orderData.phone,
+                discountId: orderData.discountId,
+                shippingFee: orderData.shippingFee,
+                totalPrice: orderData.totalPrice,
+                note: orderData.note,
+                deliveryType: orderData.deliveryType,
+                paymentType: orderData.paymentType,
+                status: orderData.status,
+            });
 
             if (orderResponse.status >= 200 && orderResponse.status < 300) {
                 const orderId = orderResponse.data;
@@ -190,7 +213,7 @@ export default function Orders() {
                     onChange={(e) => handleOnChangeSearchType(e)}
                 >
                     <option value="name">Tên</option>
-                    <option value="email">Email</option>
+                    <option value="customerEmail">Email</option>
                     <option value="phone">Số điện thoại</option>
                 </select>
                 <select

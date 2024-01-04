@@ -30,7 +30,7 @@ export const AddStaff = async (staff) => {
 
 export const UpdateStaff = async (staff) => {
     try {
-        const res = await axios.put("/User/Staff", staff);
+        const res = await axios.put("/User/Staffs/Update", staff);
         return res;
     } catch (e) {
         console.log(e);
